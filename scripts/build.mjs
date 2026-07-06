@@ -251,6 +251,7 @@ function headerMarkup() {
       <a href="/archives/">归档</a>
       <a href="/categories/">分类</a>
       <a href="/tags/">标签</a>
+      <a href="/oracle/">卜签</a>
       <a href="/HankZ/about.html">关于</a>
       <a href="https://github.com/HankZhangZ" target="_blank" rel="noreferrer">GitHub</a>
     </nav>
@@ -448,6 +449,17 @@ async function loadAboutPage() {
     title: data.title || site.about.title,
     description: data.description || site.about.description,
     lead: data.lead || site.about.lead,
+    contentHtml: renderMarkdown(body)
+  };
+}
+
+async function loadOraclePage() {
+  const source = await fs.readFile(path.join(pagesDir, 'oracle.md'), 'utf8');
+  const { data, body } = parseFrontmatter(source);
+  return {
+    title: data.title || '六爻与每日抽签',
+    description: data.description || '一个只放在导航里的独立占卜页面。',
+    lead: data.lead || '用更轻量的方式放一个独立入口，既不挤占首页，也方便后续继续扩展。',
     contentHtml: renderMarkdown(body)
   };
 }
@@ -787,6 +799,103 @@ async function buildAboutPage() {
   }));
 }
 
+async function buildOraclePage() {
+  const oracle = await loadOraclePage();
+
+  await writePage('/oracle/', documentMarkup({
+    title: `${oracle.title} | ${site.siteTitle}`,
+    description: oracle.description,
+    bodyClass: 'page-oracle',
+    content: `
+<main class="page-main">
+  <section class="page-hero reveal is-visible">
+    <span class="eyebrow">Oracle</span>
+    <h1>${escapeHtml(oracle.title)}</h1>
+    <p>${escapeHtml(oracle.lead)}</p>
+  </section>
+  <section class="page-content section-stack">
+    <section class="info-card reveal is-visible">
+      <span class="eyebrow-muted">独立入口</span>
+      <h3>只放在导航，不进入正文流</h3>
+      <div class="prose">${oracle.contentHtml}</div>
+    </section>
+    <div class="oracle-grid">
+      <section class="oracle-panel reveal is-visible" data-oracle-daily>
+        <span class="eyebrow-muted">Daily Draw</span>
+        <h3>每日抽签</h3>
+        <p class="oracle-panel-copy">当天只保留一支签。刷新页面不会变，第二天会自动更新。</p>
+        <div class="card-actions">
+          <button class="btn btn-primary" type="button" data-daily-draw>抽取今日签</button>
+          <button class="btn btn-ghost" type="button" data-copy-link>复制页面链接</button>
+        </div>
+        <div class="fortune-display" data-daily-result hidden>
+          <div class="fortune-head">
+            <strong data-fortune-title>今日签</strong>
+            <span data-fortune-tag></span>
+          </div>
+          <p class="fortune-date" data-fortune-date></p>
+          <p class="fortune-summary" data-fortune-summary></p>
+          <ul class="fortune-points">
+            <li data-fortune-career></li>
+            <li data-fortune-action></li>
+          </ul>
+        </div>
+      </section>
+      <section class="oracle-panel reveal is-visible" data-oracle-yao>
+        <span class="eyebrow-muted">Six Lines</span>
+        <h3>六爻起卦</h3>
+        <p class="oracle-panel-copy">输入一个当前想问的问题，然后选择投铜钱或时间起卦。前者会逐次成卦，后者按当前时间直接起卦。</p>
+        <label class="oracle-label" for="oracle-question">所问之事</label>
+        <textarea class="oracle-input" id="oracle-question" rows="4" placeholder="例如：这个阶段是否适合推进当前项目？"></textarea>
+        <div class="oracle-mode-switch" data-yao-mode-switch>
+          <button class="oracle-mode is-active" type="button" data-yao-mode="coins">投铜钱</button>
+          <button class="oracle-mode" type="button" data-yao-mode="time">时间起卦</button>
+        </div>
+        <div class="oracle-mode-panel" data-yao-panel="coins">
+          <p class="oracle-mode-copy">每次点击都模拟一次三枚铜钱，累计六次后自动生成本卦和变卦。</p>
+          <div class="card-actions">
+            <button class="btn btn-primary" type="button" data-coin-toss>投一次铜钱</button>
+            <button class="btn btn-ghost" type="button" data-coin-reset>重新开始</button>
+          </div>
+          <p class="oracle-status" data-coin-status>当前进度：0 / 6</p>
+          <div class="coin-log" data-coin-log hidden></div>
+        </div>
+        <div class="oracle-mode-panel" data-yao-panel="time" hidden>
+          <p class="oracle-mode-copy">按当前年、月、日、时起卦，适合快速得到一卦做参考。</p>
+          <div class="card-actions">
+            <button class="btn btn-primary" type="button" data-time-generate>按当前时间起卦</button>
+          </div>
+        </div>
+        <div class="yao-result" data-yao-result hidden>
+          <div class="yao-meta">
+            <strong data-yao-question></strong>
+            <span data-yao-time></span>
+          </div>
+          <div class="yao-boards">
+            <div class="yao-board">
+              <span class="eyebrow-muted">本卦</span>
+              <div class="yao-stack" data-yao-primary></div>
+            </div>
+            <div class="yao-board">
+              <span class="eyebrow-muted">变卦</span>
+              <div class="yao-stack" data-yao-changed></div>
+            </div>
+          </div>
+          <div class="yao-summary">
+            <p data-yao-judgement></p>
+            <ul class="fortune-points">
+              <li data-yao-lines></li>
+              <li data-yao-balance></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>`
+  }));
+}
+
 async function main() {
   await cleanupPreviousBuild();
   const posts = await loadPosts();
@@ -797,6 +906,7 @@ async function main() {
   await buildTaxonomy(posts, 'categories', '分类');
   await buildTaxonomy(posts, 'tags', '标签');
   await buildAboutPage();
+  await buildOraclePage();
   await saveManifest();
   console.log(`Built ${posts.length} posts with content-driven theme workflow.`);
 }

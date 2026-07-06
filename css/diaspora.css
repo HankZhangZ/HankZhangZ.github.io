@@ -711,6 +711,219 @@ body.menu-open .nav-toggle::after {
   background: rgba(24, 33, 38, 0.04);
 }
 
+.oracle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.oracle-panel {
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 250, 245, 0.8);
+  border: 1px solid rgba(24, 33, 38, 0.08);
+  box-shadow: var(--shadow-soft);
+}
+
+.oracle-panel h3 {
+  margin: 10px 0 12px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+}
+
+.oracle-panel-copy {
+  margin: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.oracle-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.oracle-mode-switch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+.oracle-mode {
+  padding: 10px 16px;
+  border: 1px solid rgba(24, 33, 38, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
+  transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+}
+
+.oracle-mode:hover,
+.oracle-mode:focus-visible {
+  border-color: rgba(207, 95, 69, 0.45);
+  color: var(--ink);
+}
+
+.oracle-mode.is-active {
+  background: var(--accent-soft);
+  border-color: rgba(207, 95, 69, 0.45);
+  color: var(--accent-strong);
+}
+
+.oracle-mode-panel + .oracle-mode-panel {
+  margin-top: 10px;
+}
+
+.oracle-mode-copy,
+.oracle-status {
+  margin: 0 0 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.oracle-status {
+  margin: 14px 0 0;
+  font-size: 0.94rem;
+}
+
+.oracle-input {
+  width: 100%;
+  min-height: 132px;
+  margin-bottom: 18px;
+  padding: 16px 18px;
+  border: 1px solid rgba(24, 33, 38, 0.12);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+  resize: vertical;
+}
+
+.oracle-input:focus-visible {
+  outline: 2px solid rgba(207, 95, 69, 0.24);
+  border-color: rgba(207, 95, 69, 0.5);
+}
+
+.fortune-display,
+.yao-result {
+  margin-top: 20px;
+  padding: 22px;
+  border-radius: var(--radius-md);
+  background: rgba(24, 33, 38, 0.05);
+}
+
+.coin-log {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.coin-log-item {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.fortune-head,
+.yao-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fortune-head strong,
+.yao-meta strong {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+}
+
+.fortune-head span,
+.yao-meta span,
+.fortune-date {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.fortune-summary,
+.yao-summary p {
+  margin: 14px 0 0;
+  line-height: 1.8;
+}
+
+.fortune-points {
+  margin: 16px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.fortune-points li + li {
+  margin-top: 10px;
+}
+
+.yao-boards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.yao-board {
+  padding: 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(24, 33, 38, 0.08);
+}
+
+.yao-stack {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.yao-line-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.yao-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 18px;
+}
+
+.yao-line span {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--surface-dark) 0%, #33534d 100%);
+}
+
+.yao-line.is-yang span {
+  width: 100%;
+}
+
+.yao-line.is-yin span {
+  width: calc(50% - 7px);
+}
+
+.yao-line.is-changed span {
+  background: linear-gradient(90deg, var(--accent) 0%, #f0a56f 100%);
+}
+
+.yao-line-label {
+  color: var(--muted);
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
 .audio-panel {
   display: none;
   margin-top: 24px;
@@ -813,7 +1026,9 @@ body.menu-open .nav-toggle::after {
 @media (max-width: 980px) {
   .hero,
   .split-grid,
-  .cards-grid {
+  .cards-grid,
+  .oracle-grid,
+  .yao-boards {
     grid-template-columns: 1fr;
   }
 
@@ -821,7 +1036,8 @@ body.menu-open .nav-toggle::after {
   .hero-side,
   .page-hero,
   .article-intro,
-  .article-surface {
+  .article-surface,
+  .oracle-panel {
     padding: 28px;
   }
 
@@ -895,7 +1111,8 @@ body.menu-open .nav-toggle::after {
   .article-surface,
   .info-card,
   .timeline-card,
-  .empty-state {
+  .empty-state,
+  .oracle-panel {
     border-radius: 24px;
     padding: 22px;
   }
