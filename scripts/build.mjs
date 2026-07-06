@@ -853,6 +853,11 @@ async function buildOraclePage() {
         </div>
         <div class="oracle-mode-panel" data-yao-panel="coins">
           <p class="oracle-mode-copy">每次点击都模拟一次三枚铜钱，累计六次后自动生成本卦和变卦。</p>
+          <div class="coin-stage" data-coin-stage>
+            <div class="coin-face" data-coin-face><span>乾</span></div>
+            <div class="coin-face" data-coin-face><span>坤</span></div>
+            <div class="coin-face" data-coin-face><span>乾</span></div>
+          </div>
           <div class="card-actions">
             <button class="btn btn-primary" type="button" data-coin-toss>投一次铜钱</button>
             <button class="btn btn-ghost" type="button" data-coin-reset>重新开始</button>
@@ -871,6 +876,23 @@ async function buildOraclePage() {
             <strong data-yao-question></strong>
             <span data-yao-time></span>
           </div>
+          <div class="yao-identity">
+            <div class="yao-identity-card">
+              <span class="eyebrow-muted">本卦名称</span>
+              <strong data-yao-primary-name></strong>
+              <p data-yao-primary-theme></p>
+            </div>
+            <div class="yao-identity-card">
+              <span class="eyebrow-muted">变卦名称</span>
+              <strong data-yao-changed-name></strong>
+              <p data-yao-changed-theme></p>
+            </div>
+            <div class="yao-identity-card">
+              <span class="eyebrow-muted">气象结构</span>
+              <strong data-yao-trigram-pair></strong>
+              <p data-yao-dynamic-summary></p>
+            </div>
+          </div>
           <div class="yao-boards">
             <div class="yao-board">
               <span class="eyebrow-muted">本卦</span>
@@ -887,6 +909,32 @@ async function buildOraclePage() {
               <li data-yao-lines></li>
               <li data-yao-balance></li>
             </ul>
+          </div>
+          <div class="interpret-grid">
+            <section class="interpret-card">
+              <span class="eyebrow-muted">事业</span>
+              <p data-yao-career></p>
+            </section>
+            <section class="interpret-card">
+              <span class="eyebrow-muted">财务</span>
+              <p data-yao-wealth></p>
+            </section>
+            <section class="interpret-card">
+              <span class="eyebrow-muted">感情</span>
+              <p data-yao-relationship></p>
+            </section>
+            <section class="interpret-card">
+              <span class="eyebrow-muted">健康</span>
+              <p data-yao-health></p>
+            </section>
+            <section class="interpret-card">
+              <span class="eyebrow-muted">行动建议</span>
+              <p data-yao-action></p>
+            </section>
+            <section class="interpret-card">
+              <span class="eyebrow-muted">风险提醒</span>
+              <p data-yao-risk></p>
+            </section>
           </div>
         </div>
       </section>
