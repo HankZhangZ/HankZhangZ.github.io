@@ -1,0 +1,36 @@
+﻿{
+  "siteTitle": "北白玉",
+  "siteTagline": "Hank Zhang's blog",
+  "siteDescription": "Hank Zhang 的静态博客，记录网站折腾、写作和个人笔记。",
+  "hero": {
+    "eyebrow": "Personal Notes · Design Refresh",
+    "title": "把旧博客改造成更适合持续写作的现代主页。",
+    "lead": "这里记录折腾网站、写下零碎想法，也保存一些真正踩过的坑。新版本不再是旧主题套壳，而是围绕阅读、浏览和触达做了一次完整重排。",
+    "featuredNoteTitle": "这次重构的重点",
+    "featuredNoteBody": "更清晰的信息层级、更像样的按钮反馈，以及在手机上也可读的排版。",
+    "featuredEyebrow": "Featured Post"
+  },
+  "footerNote": "© 2020-2026 Hank Zhang. 这是一份部署在 GitHub Pages 上的静态博客。",
+  "socialLinks": [
+    { "label": "归档", "href": "/archives/" },
+    { "label": "关于我", "href": "/HankZ/about.html" },
+    { "label": "GitHub", "href": "https://github.com/HankZhangZ" },
+    { "label": "Twitter", "href": "https://twitter.com/lzh_zhang" }
+  ],
+  "about": {
+    "title": "关于我",
+    "description": "关于 Hank Zhang 的介绍页。",
+    "lead": "这页补齐了原站中非常简短的自我介绍，并与新版博客的视觉保持一致。",
+    "profileItems": [
+      { "label": "定位", "text": "个人博客 / 静态站点 / GitHub Pages" },
+      { "label": "关注", "text": "网页设计、内容记录、建站实践。" },
+      { "label": "链接", "text": "GitHub 主页", "href": "https://github.com/HankZhangZ" }
+    ]
+  },
+  "listingDescriptions": {
+    "posts": "这里集中列出目前公开的全部文章，方便从标题和摘要直接进入。",
+    "archives": "如果你更习惯按照时间线浏览内容，这里会比首页更直接。",
+    "categories": "分类页会根据文章 frontmatter 自动聚合，后续新增文档后这里会自动更新。",
+    "tags": "标签页同样由内容源自动生成，适合后续按主题组织文章。"
+  }
+}
